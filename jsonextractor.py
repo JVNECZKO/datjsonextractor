@@ -11,7 +11,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def set_cookies(driver, cookies):
-    driver.get("https://1-25-0.elements.4sellers.cloud/main")
+    driver.get("") # insert url
     time.sleep(5) 
     for cookie in cookies:
         driver.add_cookie(cookie)
@@ -37,7 +37,7 @@ def intercept_network_requests(driver, reference_code, output_folder):
 
     for log in logs:
         message = json.loads(log["message"])
-        log_data.append(message)  # Zapisanie logu do listy
+        log_data.append(message)  # save log to list
         if "Network.responseReceived" in message["message"]["method"]:
             response_params = message["message"]["params"]
             if "response" in response_params and "requestId" in response_params:
@@ -47,7 +47,7 @@ def intercept_network_requests(driver, reference_code, output_folder):
                     body = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': request_id})
                     try:
                         response_data = json.loads(body['body'])
-                        # Zapisanie pojedynczego pliku JSON dla każdego żądania
+                        # save singular JSON file for each call
                         output_file = os.path.join(output_folder, f"{reference_code}_{request_id}.json")
                         with open(output_file, 'w') as f:
                             json.dump(response_data, f, indent=4)
