@@ -12,14 +12,14 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def set_cookies(driver, cookies):
     driver.get("https://1-25-0.elements.4sellers.cloud/main")
-    time.sleep(5)  # Poczekaj, aż strona się załaduje
+    time.sleep(5) 
     for cookie in cookies:
         driver.add_cookie(cookie)
     driver.refresh()
-    time.sleep(7)  # Poczekaj, aż strona się załaduje po odświeżeniu
+    time.sleep(7) 
 
 def intercept_network_requests(driver, reference_code, output_folder):
-    # Wyczyść logi sieciowe
+
     driver.get_log("performance")
     
     # Find search box and insert ref code
